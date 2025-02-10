@@ -1,0 +1,63 @@
+/* Style global */
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Effet néon */
+.neon-text {
+    color: violet;
+    text-shadow: 0 0 5px violet, 0 0 10px violet, 0 0 15px violet;
+}
+
+/* Container de login */
+.login-container {
+    text-align: center;
+    border: 2px solid violet;
+    padding: 40px;
+    background-color: black;
+    box-shadow: 0 0 15px violet;
+    border-radius: 15px;
+}
+
+input, button {
+    background-color: black;
+    color: white;
+    border: 2px solid violet;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 25px;
+    width: 250px;
+    font-size: 18px;
+    box-shadow: 0 0 10px violet;
+}
+
+/* Animation bouton néon */
+.neon-btn:hover, .neon-input:hover {
+    background-color: violet;
+    color: black;
+    box-shadow: 0 0 20px violet, 0 0 30px violet;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Style spécifique pour les champs de texte */
+input[type="text"], input[type="password"] {
+    font-size: 18px;
+}
+
+/* Ajouter un effet de glow pour les labels */
+label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

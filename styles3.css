@@ -1,0 +1,27 @@
+/* Page Projet IT */
+.projet-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    flex-direction: column;
+}
+
+.neon-btn {
+    background-color: black;
+    color: violet;
+    border: 2px solid violet;
+    padding: 20px 40px;
+    margin: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 0 15px violet, 0 0 25px violet;
+}
+
+.neon-btn:hover {
+    background-color: violet;
+    color: black;
+    box-shadow: 0 0 30px violet, 0 0 40px violet;
+}

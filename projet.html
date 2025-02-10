@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet IT</title>
+    <link rel="stylesheet" href="styles3.css">
+</head>
+<body>
+    <div class="projet-container">
+        <button class="neon-btn" id="diapoBtn">Afficher Diapo</button>
+        <button class="neon-btn" id="texteBtn">Afficher Texte</button>
+        <button class="neon-btn" id="sourceBtn">Afficher Source</button>
+    </div>
+
+    <script>
+        // Afficher le fichier Diapo (converti en PDF)
+        document.getElementById('diapoBtn').addEventListener('click', function() {
+            window.open('diapo.pdf', '_blank');  // Remplacer par le chemin du fichier PDF
+        });
+
+        // Afficher le fichier Texte (txt ou jsp)
+        document.getElementById('texteBtn').addEventListener('click', function() {
+            window.open('texte.txt', '_blank');  // Affiche le fichier texte dans le navigateur
+        });
+
+        // Afficher le fichier Source (txt)
+        document.getElementById('sourceBtn').addEventListener('click', function() {
+            window.open('source.txt', '_blank');  // Affiche le fichier texte dans le navigateur
+        });
+    </script>
+</body>
+</html>

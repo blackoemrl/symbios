@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="top-bar">
+        <p class="neon-text" id="userDisplay"></p>
+    </div>
+
+    <div class="dashboard-container">
+        <button id="projetBtn" class="neon-btn">Projet IT</button>
+    </div>
+
+    <script>
+        // Afficher le pseudo de l'utilisateur
+        document.getElementById('userDisplay').textContent = 'Utilisateur connecté : ' + sessionStorage.getItem('user');
+
+        // Rediriger vers la page de projet
+        document.getElementById('projetBtn').addEventListener('click', function() {
+            window.location.href = 'projet.html';
+        });
+    </script>
+</body>
+</html>
