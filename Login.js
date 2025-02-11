@@ -1,53 +1,39 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-</head>
-<body>
-    <h2>Connexion</h2>
-    <form id="loginForm">
-        <label>Nom d'utilisateur :</label>
-        <input type="text" id="username" required>
-        
-        <label>Mot de passe :</label>
-        <input type="password" id="password" required>
-        
-        <button type="submit">Se connecter</button>
-    </form>
+export default async function handler(req, res) {
+    if (req.method !== "POST") {
+        return res.status(405).json({ message: "Méthode non autorisée" });
+    }
 
-    <p id="message"></p>
+    // Liste des utilisateurs autorisés (stockés côté serveur)
+    const users = [
+        { username: "Abyss", password: "Admin" },
+        { username: "Adam", password: "Admin" }
+    ];
 
-    <script>
-        document.getElementById("loginForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
+    const { username, password } = req.body;
 
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+    // Vérifier si l'utilisateur est autorisé
+    const user = users.find(u => u.username === username && u.password === password);
+    
+    if (!user) {
+        return res.status(401).json({ success: false, message: "Identifiants incorrects" });
+    }
 
-            const response = await fetch("/api/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
-            });
+    // Récupérer l'heure et l'adresse IP
+    const date = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
-            const data = await response.json();
-            const messageElement = document.getElementById("message");
+    // Remplace cette ligne par l'URL de ton propre webhook Discord
+    const webhookURL = "https://discord.com/api/webhooks/1338762578469588992/tLlMBkg0RdhiLCXFOmjzB4YOyusC2WmQ9FcvUde1v5wokdUOI-FXWeZLzOqBebvihB4U";  // <-- Remplace par ton webhook Discord
 
-            if (data.success) {
-                messageElement.textContent = "Connexion réussie !";
-                messageElement.style.color = "green";
+    // Envoyer la notification Discord
+    await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content: `📢 **Nouvelle connexion !**\n👤 **Utilisateur** : ${username}\n🕒 **Heure** : ${date}\n📌 **IP** : ${ip}`
+        })
+    });
 
-                // Redirection vers une autre page si besoin
-                setTimeout(() => {
-                    window.location.href = "index.html"; // Modifier avec la page d'accueil
-                }, 1000);
-            } else {
-                messageElement.textContent = "Identifiants incorrects.";
-                messageElement.style.color = "red";
-            }
-        });
-    </script>
-</body>
-</html>
+    // Répondre au client
+    res.status(200).json({ success: true, message: "Connexion réussie" });
+}
