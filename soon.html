@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Géant</title>
-    <link rel="stylesheet" href="styles2.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,63 +84,6 @@
         </div>
     </div>
 
-    <script>
-        // Récupérer l'utilisateur actuel (Adam ou Abyss)
-        const username = sessionStorage.getItem('user') || 'Utilisateur';  // Par défaut 'Utilisateur' si aucun nom d'utilisateur n'est défini
-
-        const messageInput = document.getElementById('messageInput');
-        const sendMessageBtn = document.getElementById('sendMessageBtn');
-        const messageContainer = document.getElementById('messageContainer');
-
-        // Fonction pour ajouter un message au chat
-        function addMessage(message, sender) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.innerHTML = `<span>${sender} :</span> ${message}`;
-            messageContainer.appendChild(messageElement);
-
-            // Faire défiler les messages vers le bas
-            messageContainer.scrollTop = messageContainer.scrollHeight;
-        }
-
-        // Fonction pour charger les messages depuis localStorage
-        function loadMessages() {
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-
-            // Afficher les messages enregistrés
-            messages.forEach(msg => {
-                addMessage(msg.text, msg.sender);
-            });
-        }
-
-        // Fonction pour sauvegarder les messages dans localStorage
-        function saveMessage(message, sender) {
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-            messages.push({ text: message, sender: sender });
-            localStorage.setItem('messages', JSON.stringify(messages));
-        }
-
-        // Envoyer un message
-        sendMessageBtn.addEventListener('click', () => {
-            const message = messageInput.value.trim();
-
-            if (message !== "") {
-                addMessage(message, username);  // Ajouter le message avec le nom de l'utilisateur
-                saveMessage(message, username); // Sauvegarder le message dans localStorage
-                messageInput.value = "";  // Effacer le champ de saisie
-            }
-        });
-
-        // Permet d'envoyer un message avec la touche "Entrée"
-        messageInput.addEventListener('keypress', function(event) {
-            if (event.key === "Enter") {
-                sendMessageBtn.click();
-            }
-        });
-
-        // Charger les messages existants depuis localStorage au chargement de la page
-        loadMessages();
-    </script>
-
+    <script src="chat.js"></script>
 </body>
 </html>
