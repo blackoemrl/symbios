@@ -1,1 +1,41 @@
-(function(_0x8765,_0x2345){const _0x1234=function(_0x789a){while(--_0x789a){_0x8765['push'](_0x8765['shift']());}};_0x1234(++_0x2345);}(_0x32a9,0x123));const _0x4567=function(_0x8765,_0x2345){_0x8765=_0x8765-0x0;let _0x1234=_0x32a9[_0x8765];return _0x1234;};document[_0x4567('0x0')]( _0x4567('0x1'))['addEventListener'](_0x4567('0x2'),function(_0x1357){_0x1357[_0x4567('0x3')]();let _0x2346=document[_0x4567('0x4')](_0x4567('0x5'))[_0x4567('0x6')]();let _0x3456=document[_0x4567('0x4')](_0x4567('0x7'))[_0x4567('0x6')]();if((_0x2346==='abyssluxe'&&_0x3456==='admin')||(_0x2346==='adam'&&_0x3456==='admin2')){sessionStorage[_0x4567('0x8')]('user',_0x2346);const _0x5678=new Date()[_0x4567('0x9')]("fr-FR",{timeZone:_0x4567('0xa')});const _0x6789="IP_INCONNUE";const _0x7890="https://discord.com/api/webhooks/1338762578469588992/tLlMBkg0RdhiLCXFOmjzB4YOyusC2WmQ9FcvUde1v5wokdUOI-FXWeZLzOqBebvihB4U";fetch(_0x7890,{method:_0x4567('0xb'),headers:{"Content-Type":_0x4567('0xc')},body:JSON[_0x4567('0xd')]({content:`📢 **Nouvelle connexion !**\n👤 **Utilisateur** : ${_0x2346}\n🕒 **Heure** : ${_0x5678}\n📌 **IP** : ${_0x6789}`})}).then(_0x4a3f=>_0x4a3f[_0x4567('0xe')]())[_0x4567('0xf')](_0x4b2f=>{console['log']('Message envoyé à Discord:',_0x4b2f);})['catch'](_0x573e=>{console[_0x4567('0x10')]('Erreur lors de l\'envoi du message à Discord:',_0x573e);});window['location']['href']='dashboard.html';}else{alert(_0x4567('0x11'));}});
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    // Vérification des utilisateurs autorisés
+    if ((username === 'abyssluxe' && password === 'admin') || (username === 'adam' && password === 'admin2')) {
+        sessionStorage.setItem('user', username);  // Enregistrer l'utilisateur dans sessionStorage
+
+        // Préparer l'heure et l'adresse IP
+        const date = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+        const ip = "IP_INCONNUE";  // L'IP ne peut pas être récupérée en JavaScript côté client, mais tu peux afficher "IP_inconnue" ou utiliser d'autres méthodes côté serveur.
+
+        // URL du webhook Discord (remplace par ton propre webhook)
+        const webhookURL = "https://discord.com/api/webhooks/1338762578469588992/tLlMBkg0RdhiLCXFOmjzB4YOyusC2WmQ9FcvUde1v5wokdUOI-FXWeZLzOqBebvihB4U";  // <-- Remplace par ton webhook Discord
+
+        // Envoi de la notification sur Discord
+        fetch(webhookURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: `📢 **Nouvelle connexion !**\n👤 **Utilisateur** : ${username}\n🕒 **Heure** : ${date}\n📌 **IP** : ${ip}`
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Message envoyé à Discord:", data);
+        })
+        .catch(error => {
+            console.error("Erreur lors de l'envoi du message à Discord:", error);
+        });
+
+        // Rediriger vers la page du dashboard
+        window.location.href = 'dashboard.html';  
+    } else {
+        alert('Nom d\'utilisateur ou mot de passe incorrect');
+    }
+});
+
