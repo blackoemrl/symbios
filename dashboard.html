@@ -16,7 +16,7 @@
     </div>
 
     <div class="dashboard-container">
-        <button id="soonBtn" class="neon-btn">Soon...</button>
+        <button id="soon" class="neon-btn">Soon...</button>
     </div>
     
     <script>
@@ -26,9 +26,10 @@
         // Rediriger vers la page de projet
         document.getElementById('projetBtn').addEventListener('click', function() {
             window.location.href = 'projet.html';
-             });
+        });
 
-        document.getElementById('soonBtn').addEventListener('click', function() {
+        // Ajouter l'événement pour le bouton "Soon..."
+        document.getElementById('soon').addEventListener('click', function() {
             window.location.href = 'login.html';
         });
     </script>
